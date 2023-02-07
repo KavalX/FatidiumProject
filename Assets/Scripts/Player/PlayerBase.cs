@@ -26,6 +26,6 @@ public class PlayerBase : MonoBehaviour
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
-        }
-    }
+        } 
+    } 
 }

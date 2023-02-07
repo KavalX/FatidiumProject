@@ -8,16 +8,19 @@ public class HumanBase : PlayerBase
     [SerializeField] protected float strength;
     [SerializeField] protected float size;
     
-    
-    // Start is called before the first frame update
-    void Start()
+    public float Health
     {
-        
+        get => health;
+        set => health = value;
     }
-
-    // Update is called once per frame
+    
     protected new void Update()
     {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+        
         base.Update();
         if (Input.GetKey(KeyCode.LeftShift))
         {

@@ -7,9 +7,7 @@ public class PlayerControl : NetworkBehaviour
 {
     [SerializeField]
     private float walkSpeed = 0.1f;
-
-
-
+    
     [SerializeField]
     private NetworkVariable<float> forwardBackPosition = new();
 

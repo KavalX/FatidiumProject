@@ -6,14 +6,15 @@ using UnityEngine;
 public class Ghost : PlayerBase
 {
     [SerializeField] private GameObject projectile;
-    [SerializeField] private float projectileSpeed;
     [SerializeField] private float cooldown;
+    [SerializeField] private float projectileSpeed;
+    private float _actualCooldown;
     private Vector3 _mousePosition;
 
     // Start is called before the first frame update
     void Start()
     {
-        cooldown = 0;
+
     }
 
     // Update is called once per frame
@@ -24,17 +25,16 @@ public class Ghost : PlayerBase
         base.Update();
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (cooldown <= 0)
+            if (_actualCooldown <= 0)
             {
                 GameObject projectileInstance = Instantiate(projectile, transform.position, Quaternion.identity);
-                
-                projectileInstance.GetComponent<Rigidbody2D>().velocity = new Vector3(_mousePosition.x, _mousePosition.y, 0);
-                cooldown = 5;
+                projectileInstance.GetComponent<Rigidbody2D>().velocity = new Vector2(_mousePosition.x * projectileSpeed, _mousePosition.y*projectileSpeed);
+                _actualCooldown = cooldown;
             }
         }
         else
         {
-            cooldown -= Time.deltaTime;
+            _actualCooldown -= Time.deltaTime;
         }
     }
 }
