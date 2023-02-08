@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerBase : MonoBehaviour
@@ -22,10 +23,12 @@ public class PlayerBase : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
+            GetComponent<SpriteRenderer>().flipX = true;
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
+            GetComponent<SpriteRenderer>().flipX = false;
         } 
     } 
 }

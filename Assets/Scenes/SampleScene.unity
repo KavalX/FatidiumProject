@@ -214,6 +214,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7117863773347004184, guid: 882858ba71ee18b4fa878cc668056639, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7117863773347004187, guid: 882858ba71ee18b4fa878cc668056639, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -224,7 +228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7117863773347004187, guid: 882858ba71ee18b4fa878cc668056639, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.09006378
+      value: -0.04
       objectReference: {fileID: 0}
     - target: {fileID: 7117863773347004187, guid: 882858ba71ee18b4fa878cc668056639, type: 3}
       propertyPath: m_LocalPosition.z
@@ -260,6 +264,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7117863773347004190, guid: 882858ba71ee18b4fa878cc668056639, type: 3}
       propertyPath: m_Name
+      value: Ghost
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117863773347004190, guid: 882858ba71ee18b4fa878cc668056639, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7117863773347004190, guid: 882858ba71ee18b4fa878cc668056639, type: 3}
+      propertyPath: m_TagString
       value: Ghost
       objectReference: {fileID: 0}
     - target: {fileID: 7117863773347004191, guid: 882858ba71ee18b4fa878cc668056639, type: 3}

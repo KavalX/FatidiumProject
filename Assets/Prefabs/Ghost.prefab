@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 1238938350404461484}
   - component: {fileID: 8255132635421596057}
   - component: {fileID: -7324366348547509885}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ghost
-  m_TagString: Untagged
+  m_TagString: Ghost
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,4 +223,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   projectile: {fileID: 7089247127430120636, guid: dbcddfdac0433884ab802a10d1cc5d80, type: 3}
-  cooldown: 1
+  cooldown: 2
