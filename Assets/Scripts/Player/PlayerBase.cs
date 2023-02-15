@@ -4,10 +4,6 @@ using UnityEngine;
 public class PlayerBase : MonoBehaviour
 {
     [SerializeField] protected float speed;
-    void Start()
-    {
-        
-    }
     
     protected void Update()
     {

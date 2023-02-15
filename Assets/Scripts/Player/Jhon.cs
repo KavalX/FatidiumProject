@@ -4,14 +4,7 @@ using UnityEngine;
 
 public class Jhon : HumanBase
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-     new void Update()
+    new void Update()
     {
         base.Update();
     }

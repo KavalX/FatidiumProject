@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ghost
+  - Door
+  - Key
+  - Projectile
   layers:
   - Default
   - TransparentFX
