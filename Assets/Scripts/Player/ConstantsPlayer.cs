@@ -12,3 +12,7 @@ public enum Actions
     Move,
     Action,
 }
+public enum TypePlayer{
+    Gosht=1,
+    Human=0
+}

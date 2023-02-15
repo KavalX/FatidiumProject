@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerControl : NetworkBehaviour
 {
     [SerializeField]
-    private float walkSpeed = 0.1f;
+    protected float speed = 0.1f;
     
     [SerializeField]
     private NetworkVariable<float> forwardBackPosition = new();
@@ -62,7 +62,7 @@ public class PlayerControl : NetworkBehaviour
 
         //rigBody.AddForce(force * walkSpeed);
         // update the server
-        UpdateClientPositionServerRpc(force, walkSpeed);
+        UpdateClientPositionServerRpc(force, speed);
 
     }
 

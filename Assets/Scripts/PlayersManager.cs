@@ -6,7 +6,9 @@ using UnityEngine;
 public class PlayersManager : SingletonNetBehaviour<PlayersManager>
 {
     private NetworkVariable<int> playersInGame = new NetworkVariable<int>();
-
+    private NetworkVariable<int> lastTypePlayer = new NetworkVariable<int>();
+    [SerializeField] private GameObject PlayerPrefabs;
+    [SerializeField] private GameObject GoshtPrefabs;
     public int PlayersInGame
     {
         get
@@ -15,12 +17,19 @@ public class PlayersManager : SingletonNetBehaviour<PlayersManager>
 
         }
     }
+
+    public NetworkVariable<int> LastTypePlayer
+    {
+        get => lastTypePlayer;
+        set => lastTypePlayer = value;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         NetworkManager.Singleton.OnTransportFailure += () =>
         {
-            Debug.Log("El autobús se cayó");
+            Debug.Log("El autobï¿½s se cayï¿½");
         };
 
         NetworkManager.Singleton.OnClientConnectedCallback += (id) =>
@@ -37,6 +46,11 @@ public class PlayersManager : SingletonNetBehaviour<PlayersManager>
                     playersInGame.Value++;
                 }
 
+                if (lastTypePlayer.Value == 2)
+                {
+                    //GameObject gosht = Instantiate(GoshtPrefabs);
+                    //gosht.GetComponent<NetworkObject>().Spawn();
+                }
             }
         };
 
@@ -61,5 +75,16 @@ public class PlayersManager : SingletonNetBehaviour<PlayersManager>
     public void restPlayers()
     {
         playersInGame.Value--;
+    }
+    
+    [ServerRpc(RequireOwnership=false)] //server owns this object but client can request a spawn
+    public void SpawnPlayerServerRpc(ulong clientId,int prefabId) {
+        /*GameObject newPlayer;
+        if (prefabId==0)
+            newPlayer=(GameObject)Instantiate(PlayerPrefabs);
+        else
+            newPlayer=(GameObject)Instantiate(GoshtPrefabs);
+        */
+        print("SPAWNEO UN NUEVO PLAYER...");
     }
 }
