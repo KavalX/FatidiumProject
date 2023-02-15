@@ -8,14 +8,7 @@ public class Ghost : PlayerBase
     [SerializeField] private GameObject projectile;
     [SerializeField] private float cooldown;
     private float _actualCooldown;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
+    
     private new void Update()
     {
         base.Update();

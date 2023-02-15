@@ -23,12 +23,12 @@ public class PlayerBase : MonoBehaviour
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
-            GetComponent<SpriteRenderer>().flipX = true;
+            GetComponent<SpriteRenderer>().flipX = false;
         }
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
-            GetComponent<SpriteRenderer>().flipX = false;
+            GetComponent<SpriteRenderer>().flipX = true;
         } 
     } 
 }
