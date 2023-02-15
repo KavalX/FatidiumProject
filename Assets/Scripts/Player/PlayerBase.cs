@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerBase : MonoBehaviour
+public class PlayerBase : PlayerControl
 {
     [SerializeField] protected float speed;
     
