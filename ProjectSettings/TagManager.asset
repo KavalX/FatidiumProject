@@ -8,6 +8,7 @@ TagManager:
   - Door
   - Key
   - Projectile
+  - StickyFloor
   layers:
   - Default
   - TransparentFX

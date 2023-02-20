@@ -39,7 +39,25 @@ public class HumanBase : PlayerBase
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
             Destroy(collision.gameObject);
         }
-    } 
+    }
+    
+    protected void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("StickyFloor"))
+        {
+            Debug.Log("Ralentizado");
+            speed = 2f;
+        }
+    }
+    
+    protected void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("StickyFloor"))
+        {
+            Debug.Log("Velocidad normal");
+            speed = 5f;
+        }
+    }
 
     protected new void Update()
     {

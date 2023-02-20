@@ -98,5 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  forwardBackPosition:
+    m_InternalValue: 0
+  leftRightPosition:
+    m_InternalValue: 0
+  speed: 5
   projectile: {fileID: 7089247127430120636, guid: dbcddfdac0433884ab802a10d1cc5d80, type: 3}
   cooldown: 5
