@@ -11,12 +11,20 @@ public class HumanBase : PlayerBase
     [SerializeField] protected bool hasKey = false;
     [SerializeField] protected float sprintLimit = 3f;
     
+    private readonly float _originalSpeed = 5f;
+    
     public float Health
     {
         get => health;
         set => health = value;
     }
     
+    public float Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
+
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Door") && hasKey)
@@ -35,27 +43,27 @@ public class HumanBase : PlayerBase
         
         if (collision.gameObject.CompareTag("Projectile"))
         {
-            Debug.Log("Golpeado");
+            Debug.Log("Golpe de remo");
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
             Destroy(collision.gameObject);
         }
     }
     
-    protected void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("StickyFloor"))
         {
             Debug.Log("Ralentizado");
-            speed = 2f;
+            speed = speed / 2;
         }
     }
     
-    protected void OnTriggerExit(Collider other)
+    protected void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("StickyFloor"))
         {
             Debug.Log("Velocidad normal");
-            speed = 5f;
+            speed = _originalSpeed;
         }
     }
 
