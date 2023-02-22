@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4813705464647358633}
   - component: {fileID: 4813705464647358632}
   - component: {fileID: -8000684230454171663}
+  - component: {fileID: 268466482002506537}
   m_Layer: 0
   m_Name: ghost1
   m_TagString: Ghost
@@ -122,3 +123,23 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &268466482002506537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4813705464647358639}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7e81fe86ea3a84dabc084a1ac4a734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  forwardBackPosition:
+    m_InternalValue: 0
+  leftRightPosition:
+    m_InternalValue: 0
+  speed: 5
+  projectile: {fileID: 7089247127430120636, guid: dbcddfdac0433884ab802a10d1cc5d80, type: 3}
+  cooldown: 1

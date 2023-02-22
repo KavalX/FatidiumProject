@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8799425031005238451}
   - component: {fileID: 8799425031005238450}
   - component: {fileID: 8799425031005238449}
+  - component: {fileID: 8064552644161381898}
   m_Layer: 0
   m_Name: human1
   m_TagString: Player
@@ -174,3 +175,26 @@ MonoBehaviour:
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
+--- !u!114 &8064552644161381898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8799425031005238447}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa2a58340c6d06a45afb33c6118dd15c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  forwardBackPosition:
+    m_InternalValue: 0
+  leftRightPosition:
+    m_InternalValue: 0
+  speed: 5
+  health: 30
+  strength: 1
+  size: 1
+  hasKey: 0
+  sprintLimit: 3
