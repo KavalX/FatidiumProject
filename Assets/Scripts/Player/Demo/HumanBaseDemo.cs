@@ -11,12 +11,15 @@ public class HumanBaseDemo : PlayerBaseDemo
     [SerializeField] protected bool hasKey = false;
     [SerializeField] protected float sprintLimit = 3f;
     
+    
     private readonly float _originalSpeed = 3f;
     private bool _ralentizado;
     
     [SerializeField] Healthbar _healthBar;
     [SerializeField] StaminaBar _StaminaBar;
 
+    [SerializeField] AudioSource _walkSound;
+    
     public float Health
     {
         get => health;
@@ -94,6 +97,18 @@ public class HumanBaseDemo : PlayerBaseDemo
         {
             speed = _originalSpeed;
             sprintLimit += Time.deltaTime;
+        }
+        
+        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
+        {
+            if (!_walkSound.isPlaying)
+            {
+                _walkSound.Play();
+            }
+        }
+        else
+        {
+            _walkSound.Stop();
         }
     }
 }

@@ -5,6 +5,7 @@ public class GhostDemo : PlayerBaseDemo
     [SerializeField] private GameObject projectile;
     [SerializeField] private float cooldown;
     private float _actualCooldown;
+    [SerializeField] private AudioSource _shootSound;
 
     private new void Update()
     {
@@ -16,6 +17,7 @@ public class GhostDemo : PlayerBaseDemo
             {
                 Instantiate(projectile, transform.position, Quaternion.identity);
                 _actualCooldown = cooldown;
+                _shootSound.Play();
             }
         }
         else if (_actualCooldown > 0)
