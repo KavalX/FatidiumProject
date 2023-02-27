@@ -11,8 +11,12 @@ public class HumanBaseDemo : PlayerBaseDemo
     [SerializeField] protected bool hasKey = false;
     [SerializeField] protected float sprintLimit = 3f;
     
-    private readonly float _originalSpeed = 5f;
+    private readonly float _originalSpeed = 3f;
+    private bool _ralentizado;
     
+    [SerializeField] Healthbar _healthBar;
+    [SerializeField] StaminaBar _StaminaBar;
+
     public float Health
     {
         get => health;
@@ -45,30 +49,35 @@ public class HumanBaseDemo : PlayerBaseDemo
         {
             Debug.Log("Golpe de remo");
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
+            _healthBar.SetHealth(health);
             Destroy(collision.gameObject);
         }
     }
-    
-    protected void OnTriggerEnter2D(Collider2D other)
+
+    protected void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("StickyFloor"))
         {
             Debug.Log("Ralentizado");
-            speed = speed / 2;
+            _ralentizado = true;
+            speed = _originalSpeed / 3;
         }
     }
-    
-    protected void OnTriggerExit2D(Collider2D other)
+
+   protected void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("StickyFloor"))
         {
             Debug.Log("Velocidad normal");
+            _ralentizado = false;
             speed = _originalSpeed;
         }
     }
 
     protected new void Update()
     {
+        _StaminaBar.SetStamina(sprintLimit);
+        
         if (health <= 0)
         {
             Destroy(gameObject);
@@ -76,14 +85,14 @@ public class HumanBaseDemo : PlayerBaseDemo
         
         base.Update();
         
-        if (Input.GetKey(KeyCode.LeftShift) && sprintLimit > 0)
+        if (Input.GetKey(KeyCode.LeftShift) && sprintLimit > 0 && !_ralentizado)
         {
-            speed = 10f;
+            speed = _originalSpeed * 2;
             sprintLimit -= Time.deltaTime;
         }
         else if (sprintLimit < 3f)
         {
-            speed = 5f;
+            speed = _originalSpeed;
             sprintLimit += Time.deltaTime;
         }
     }

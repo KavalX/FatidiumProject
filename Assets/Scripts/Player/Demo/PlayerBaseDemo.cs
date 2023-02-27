@@ -1,14 +1,20 @@
 using System;
 using UnityEngine;
 
-public class PlayerBaseDemo : PlayerControl
+public class PlayerBaseDemo : MonoBehaviour
 {
     [SerializeField] protected float speed;
 
     private SpriteRenderer _spriteRenderer;
     private GameObject _player;
     private GameObject _ghost;
-
+    
+    public float Speed
+    {
+        get => speed;
+        set => speed = value;
+    }
+    
     protected void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
