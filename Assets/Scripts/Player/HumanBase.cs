@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class HumanBase : PlayerBase
 {
     [SerializeField] protected float health;
@@ -10,6 +9,8 @@ public class HumanBase : PlayerBase
     [SerializeField] protected float size;
     [SerializeField] protected bool hasKey = false;
     [SerializeField] protected float sprintLimit = 3f;
+    [SerializeField] protected AudioSource walkSound;
+    
     
     private readonly float _originalSpeed = 5f;
     
@@ -85,6 +86,18 @@ public class HumanBase : PlayerBase
         {
             speed = 5f;
             sprintLimit += Time.deltaTime;
+        }
+        
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        {
+            if (!walkSound.isPlaying)
+            {
+                walkSound.Play();
+            }
+        }
+        else
+        {
+            walkSound.Stop();
         }
     }
 }

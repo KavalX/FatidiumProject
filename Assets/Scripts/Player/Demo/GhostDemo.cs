@@ -5,7 +5,7 @@ public class GhostDemo : PlayerBaseDemo
     [SerializeField] private GameObject projectile;
     [SerializeField] private float cooldown;
     private float _actualCooldown;
-    
+
     private new void Update()
     {
         base.Update();
