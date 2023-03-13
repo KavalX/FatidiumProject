@@ -900,7 +900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &519420029
 AudioListener:
   m_ObjectHideFlags: 0
@@ -936,7 +936,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.5666127
+  orthographic size: 6.216149
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1384,7 +1384,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &974321174
 Transform:
   m_ObjectHideFlags: 0
@@ -2308,7 +2308,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4813705464647358639, guid: 950df8e1114fd78408d9548630ae8fe9, type: 3}
       propertyPath: m_Name
-      value: ghost1
+      value: alvaro
       objectReference: {fileID: 0}
     - target: {fileID: 4813705464647358639, guid: 950df8e1114fd78408d9548630ae8fe9, type: 3}
       propertyPath: m_IsActive
@@ -2715,7 +2715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &2038902038
 AudioSource:
   m_ObjectHideFlags: 0
