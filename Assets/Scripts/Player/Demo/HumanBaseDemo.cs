@@ -88,10 +88,17 @@ public class HumanBaseDemo : PlayerBaseDemo
         
         base.Update();
         
-        if (Input.GetKey(KeyCode.LeftShift) && sprintLimit > 0 && !_ralentizado)
+        if (  sprintLimit > 0 && !_ralentizado  && Input.GetKey(KeyCode.LeftShift))
         {
-            speed = _originalSpeed * 2;
-            sprintLimit -= Time.deltaTime;
+            if (_rigidbody2D.velocity != Vector2.zero)
+            {
+                speed = _originalSpeed * 2;
+                sprintLimit -= Time.deltaTime;
+            }
+            
+        }else if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = _originalSpeed;
         }
         else if (sprintLimit < 3f)
         {

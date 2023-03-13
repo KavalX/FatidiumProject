@@ -8,6 +8,7 @@ public class PlayerBaseDemo : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private GameObject _player;
     private GameObject _ghost;
+    protected Rigidbody2D _rigidbody2D;
     
     public float Speed
     {
@@ -20,6 +21,7 @@ public class PlayerBaseDemo : MonoBehaviour
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _player = GameObject.FindGameObjectWithTag("Player");
         _ghost = GameObject.FindGameObjectWithTag("Ghost");
+        _rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
     protected void Update()
@@ -27,39 +29,46 @@ public class PlayerBaseDemo : MonoBehaviour
         //movement inputs
         if (Input.GetKey(KeyCode.W))
         {
-            _player.transform.Translate(Vector3.up * (speed * Time.deltaTime));
+            _rigidbody2D.velocity = (Vector3.up * (speed ));
         }
         if (Input.GetKey(KeyCode.S))
         {
-            _player.transform.Translate(Vector3.down * (speed * Time.deltaTime));
+            _rigidbody2D.velocity =(Vector3.down * (speed ));
         }
         if (Input.GetKey(KeyCode.A))
         {
-            _player.transform.Translate(Vector3.left * (speed * Time.deltaTime));
+            _rigidbody2D.velocity =(Vector3.left * (speed ));
             _spriteRenderer.flipX = false;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            _player.transform.Translate(Vector3.right * (speed * Time.deltaTime));
+            _rigidbody2D.velocity =(Vector3.right * (speed ));
             _spriteRenderer.flipX = true;
+        }
+
+        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) &&
+            !Input.GetKey(KeyCode.W))
+        {
+            _rigidbody2D.velocity =(Vector3.zero);
+
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            _ghost.transform.Translate(Vector3.up * (speed * Time.deltaTime));
+            _rigidbody2D.velocity =(Vector3.up * (speed * Time.deltaTime));
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            _ghost.transform.Translate(Vector3.down * (speed * Time.deltaTime));
+            _rigidbody2D.velocity =(Vector3.down * (speed * Time.deltaTime));
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            _ghost.transform.Translate(Vector3.left * (speed * Time.deltaTime));
+            _rigidbody2D.velocity =(Vector3.left * (speed * Time.deltaTime));
             _spriteRenderer.flipX = false;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            _ghost.transform.Translate(Vector3.right * (speed * Time.deltaTime));
+            _rigidbody2D.velocity =(Vector3.right * (speed * Time.deltaTime));
             _spriteRenderer.flipX = true;
         }
     } 
