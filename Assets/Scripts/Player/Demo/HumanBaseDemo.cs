@@ -1,25 +1,32 @@
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanBaseDemo : PlayerBaseDemo
+public class HumanBaseDemo : MonoBehaviour
 {
     [SerializeField] protected float health;
     [SerializeField] protected float strength;
     [SerializeField] protected float size;
     [SerializeField] protected bool hasKey = false;
     [SerializeField] protected float sprintLimit = 3f;
-    
+    [SerializeField] protected float speed;
+
+    private Rigidbody2D _rigidbody2D;
+    private SpriteRenderer _spriteRenderer;
     
     private readonly float _originalSpeed = 3f;
     private bool _ralentizado;
     
     [SerializeField] Healthbar _healthBar;
     [SerializeField] StaminaBar _StaminaBar;
-
     [SerializeField] AudioSource _walkSound;
-    
+
+    private void Awake()
+    {
+        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     public float Health
     {
         get => health;
@@ -86,7 +93,30 @@ public class HumanBaseDemo : PlayerBaseDemo
             Destroy(gameObject);
         }
         
-        base.Update();
+        //movement inputs
+        if (Input.GetKey(KeyCode.W))
+        {
+            _rigidbody2D.velocity = (Vector3.up * (speed ));
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            _rigidbody2D.velocity =(Vector3.down * (speed ));
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            _rigidbody2D.velocity =(Vector3.left * (speed ));
+            _spriteRenderer.flipX = false;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            _rigidbody2D.velocity =(Vector3.right * (speed ));
+            _spriteRenderer.flipX = true;
+        }
+        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) &&
+            !Input.GetKey(KeyCode.W))
+        {
+            _rigidbody2D.velocity = Vector3.zero;
+        }
         
         if (  sprintLimit > 0 && !_ralentizado  && Input.GetKey(KeyCode.LeftShift))
         {

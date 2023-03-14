@@ -3097,10 +3097,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7e81fe86ea3a84dabc084a1ac4a734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
   projectile: {fileID: 7089247127430120636, guid: dbcddfdac0433884ab802a10d1cc5d80, type: 3}
   cooldown: 2
   _shootSound: {fileID: 0}
+  speed: 0
 --- !u!114 &1222687806302778634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3295,7 +3295,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8064552644161381898, guid: a690de7af81e44c49bfe9f96fa486ba0, type: 3}
       propertyPath: speed
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8064552644161381898, guid: a690de7af81e44c49bfe9f96fa486ba0, type: 3}
       propertyPath: _speed
