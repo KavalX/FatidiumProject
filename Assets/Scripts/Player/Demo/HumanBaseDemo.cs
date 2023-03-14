@@ -14,7 +14,7 @@ public class HumanBaseDemo : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
     
-    private readonly float _originalSpeed = 3f;
+    private readonly float _originalSpeed = 5f;
     private bool _ralentizado;
     
     [SerializeField] Healthbar _healthBar;

@@ -2367,7 +2367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4813705464647358639, guid: 950df8e1114fd78408d9548630ae8fe9, type: 3}
       propertyPath: m_Name
-      value: alvaro
+      value: Casper
       objectReference: {fileID: 0}
     - target: {fileID: 4813705464647358639, guid: 950df8e1114fd78408d9548630ae8fe9, type: 3}
       propertyPath: m_IsActive
