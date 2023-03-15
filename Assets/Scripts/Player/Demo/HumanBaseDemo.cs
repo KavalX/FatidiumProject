@@ -13,9 +13,9 @@ public class HumanBaseDemo : MonoBehaviour
 
     private Rigidbody2D _rigidbody2D;
     private SpriteRenderer _spriteRenderer;
-    
     private readonly float _originalSpeed = 5f;
     private bool _ralentizado;
+    private Vector2 _direction;
     
     [SerializeField] Healthbar _healthBar;
     [SerializeField] StaminaBar _StaminaBar;
@@ -93,40 +93,40 @@ public class HumanBaseDemo : MonoBehaviour
             Destroy(gameObject);
         }
         
-        //movement inputs
-        if (Input.GetKey(KeyCode.W))
+        // Limitar velocidad diagonal
+        if (_rigidbody2D.velocity.magnitude > speed)
         {
-            _rigidbody2D.velocity = (Vector3.up * (speed ));
+            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * speed;
         }
-        if (Input.GetKey(KeyCode.S))
-        {
-            _rigidbody2D.velocity =(Vector3.down * (speed ));
-        }
+        
+        // Controles de movimiento
+        _direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        _rigidbody2D.velocity = _direction * speed;
+        
         if (Input.GetKey(KeyCode.A))
         {
-            _rigidbody2D.velocity =(Vector3.left * (speed ));
             _spriteRenderer.flipX = false;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            _rigidbody2D.velocity =(Vector3.right * (speed ));
             _spriteRenderer.flipX = true;
         }
         if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) &&
             !Input.GetKey(KeyCode.W))
         {
             _rigidbody2D.velocity = Vector3.zero;
-        }
+        } 
         
-        if (  sprintLimit > 0 && !_ralentizado  && Input.GetKey(KeyCode.LeftShift))
+        if (sprintLimit > 0 && !_ralentizado && Input.GetKey(KeyCode.LeftShift))
         {
             if (_rigidbody2D.velocity != Vector2.zero)
             {
                 speed = _originalSpeed * 2;
                 sprintLimit -= Time.deltaTime;
             }
-            
-        }else if (Input.GetKey(KeyCode.LeftShift))
+
+        } 
+        else if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = _originalSpeed;
         }
@@ -134,6 +134,7 @@ public class HumanBaseDemo : MonoBehaviour
         {
             speed = _originalSpeed;
             sprintLimit += Time.deltaTime;
+
         }
         
         if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
