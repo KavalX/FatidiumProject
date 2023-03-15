@@ -9,6 +9,7 @@ TagManager:
   - Key
   - Projectile
   - StickyFloor
+  - Computer
   layers:
   - Default
   - TransparentFX

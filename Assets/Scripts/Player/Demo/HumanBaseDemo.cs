@@ -20,6 +20,7 @@ public class HumanBaseDemo : MonoBehaviour
     [SerializeField] Healthbar _healthBar;
     [SerializeField] StaminaBar _StaminaBar;
     [SerializeField] AudioSource _walkSound;
+    [SerializeField] GameObject _victoryText;
 
     private void Awake()
     {
@@ -61,6 +62,14 @@ public class HumanBaseDemo : MonoBehaviour
             health -= collision.gameObject.GetComponent<Projectile>().Damage;
             _healthBar.SetHealth(health);
             Destroy(collision.gameObject);
+        }
+        
+        if (collision.gameObject.CompareTag("Computer"))
+        {
+            Debug.Log("Victoria");
+            _victoryText.SetActive(true);
+            _spriteRenderer.enabled = false;
+            Time.timeScale = 0;
         }
     }
 
