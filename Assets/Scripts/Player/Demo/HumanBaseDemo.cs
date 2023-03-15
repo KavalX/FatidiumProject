@@ -72,6 +72,16 @@ public class HumanBaseDemo : MonoBehaviour
             _ralentizado = true;
             speed = _originalSpeed / 3;
         }
+
+        if (other.gameObject.CompareTag("StickyFloor") && _rigidbody2D.velocity == Vector2.zero)
+        {
+            _walkSound.pitch = 0.5f;
+            _walkSound.Play();
+        }
+        else
+        {
+            _walkSound.Stop();
+        }
     }
 
    protected void OnTriggerExit2D(Collider2D other)
@@ -137,11 +147,24 @@ public class HumanBaseDemo : MonoBehaviour
 
         }
         
-        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.1f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.1f)
+      
+        //sound
+        if (_rigidbody2D.velocity != Vector2.zero)
         {
             if (!_walkSound.isPlaying)
             {
+                _walkSound.pitch = 1.2f;
                 _walkSound.Play();
+                
+            }
+        }
+        else if (Input.GetKey(KeyCode.LeftShift) && _rigidbody2D.velocity != Vector2.zero)
+        {
+            if (!_walkSound.isPlaying)
+            {
+                _walkSound.pitch = 1.8f;
+                _walkSound.Play();
+                
             }
         }
         else
@@ -150,3 +173,4 @@ public class HumanBaseDemo : MonoBehaviour
         }
     }
 }
+
