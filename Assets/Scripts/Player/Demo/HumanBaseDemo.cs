@@ -11,7 +11,7 @@ public class HumanBaseDemo : MonoBehaviour
     [SerializeField] protected float sprintLimit = 3f;
     [SerializeField] protected float speed;
 
-    private Rigidbody2D _rigidbody2D;
+    private Rigidbody _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private readonly float _originalSpeed = 5f;
     private bool _ralentizado;
@@ -22,9 +22,11 @@ public class HumanBaseDemo : MonoBehaviour
     [SerializeField] AudioSource _walkSound;
     [SerializeField] GameObject _victoryText;
 
+    [SerializeField] private VariableJoystick variableJoystick;
+
     private void Awake()
     {
-        _rigidbody2D = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -40,7 +42,7 @@ public class HumanBaseDemo : MonoBehaviour
         set => speed = value;
     }
 
-    protected void OnCollisionEnter2D(Collision2D collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Door") && hasKey)
         {
@@ -73,16 +75,16 @@ public class HumanBaseDemo : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay2D(Collider2D other)
+    protected void OnTriggerStay(Collider other)
     {
         if (other.gameObject.CompareTag("StickyFloor"))
         {
             Debug.Log("Ralentizado");
             _ralentizado = true;
-            speed = _originalSpeed / 3;
+            speed = _originalSpeed / 4;
         }
 
-        if (other.gameObject.CompareTag("StickyFloor") && _rigidbody2D.velocity == Vector2.zero)
+        if (other.gameObject.CompareTag("StickyFloor") && _rigidbody.velocity == Vector3.zero)
         {
             _walkSound.pitch = 0.5f;
             _walkSound.Play();
@@ -93,7 +95,7 @@ public class HumanBaseDemo : MonoBehaviour
         }
     }
 
-   protected void OnTriggerExit2D(Collider2D other)
+   protected void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("StickyFloor"))
         {
@@ -103,6 +105,13 @@ public class HumanBaseDemo : MonoBehaviour
         }
     }
 
+   public void FixedUpdate()
+   {
+       Vector3 direction = (Vector2)Vector3.forward * variableJoystick.Vertical + (Vector2)Vector3.right * variableJoystick.Horizontal;
+       _rigidbody.AddForce(direction * ((speed * 10) * Time.fixedDeltaTime), ForceMode.VelocityChange);
+   }
+   
+   
     protected new void Update()
     {
         _StaminaBar.SetStamina(sprintLimit);
@@ -113,14 +122,14 @@ public class HumanBaseDemo : MonoBehaviour
         }
         
         // Limitar velocidad diagonal
-        if (_rigidbody2D.velocity.magnitude > speed)
+        if (_rigidbody.velocity.magnitude > speed)
         {
-            _rigidbody2D.velocity = _rigidbody2D.velocity.normalized * speed;
+            _rigidbody.velocity = _rigidbody.velocity.normalized * speed;
         }
         
         // Controles de movimiento
         _direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        _rigidbody2D.velocity = _direction * speed;
+        _rigidbody.velocity = _direction * speed;
         
         if (Input.GetKey(KeyCode.A))
         {
@@ -133,12 +142,12 @@ public class HumanBaseDemo : MonoBehaviour
         if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) &&
             !Input.GetKey(KeyCode.W))
         {
-            _rigidbody2D.velocity = Vector3.zero;
+            _rigidbody.velocity = Vector3.zero;
         } 
         
         if (sprintLimit > 0 && !_ralentizado && Input.GetKey(KeyCode.LeftShift))
         {
-            if (_rigidbody2D.velocity != Vector2.zero)
+            if (_rigidbody.velocity != Vector3.zero)
             {
                 speed = _originalSpeed * 2;
                 sprintLimit -= Time.deltaTime;
@@ -156,9 +165,36 @@ public class HumanBaseDemo : MonoBehaviour
 
         }
         
-      
+        
+        /* if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+            switch (touch.phase)
+            {
+                case TouchPhase.Began:
+                    if (touchPosition.x < 0)
+                    {
+                        _spriteRenderer.flipX = false;
+                    }
+                    else
+                    {
+                        _spriteRenderer.flipX = true;
+                    }
+                    break;
+                case TouchPhase.Moved:
+                    _rigidbody2D.velocity = touchPosition;
+                    break;
+                case TouchPhase.Ended:
+                    _rigidbody2D.velocity = Vector2.zero;
+                    break;
+            }
+        } */
+       
+        
+        
         //sound
-        if (_rigidbody2D.velocity != Vector2.zero)
+        if (_rigidbody.velocity != Vector3.zero)
         {
             if (!_walkSound.isPlaying)
             {
@@ -167,7 +203,7 @@ public class HumanBaseDemo : MonoBehaviour
                 
             }
         }
-        else if (Input.GetKey(KeyCode.LeftShift) && _rigidbody2D.velocity != Vector2.zero)
+        else if (Input.GetKey(KeyCode.LeftShift) && _rigidbody.velocity != Vector3.zero)
         {
             if (!_walkSound.isPlaying)
             {
