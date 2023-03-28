@@ -11,7 +11,7 @@ public class HumanBaseDemo : MonoBehaviour
     [SerializeField] protected float sprintLimit = 3f;
     [SerializeField] protected float speed;
 
-    private Rigidbody _rigidbody;
+    private Rigidbody2D _rigidbody;
     private SpriteRenderer _spriteRenderer;
     private readonly float _originalSpeed = 5f;
     private bool _ralentizado;
@@ -26,7 +26,7 @@ public class HumanBaseDemo : MonoBehaviour
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -42,7 +42,7 @@ public class HumanBaseDemo : MonoBehaviour
         set => speed = value;
     }
 
-    protected void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Door") && hasKey)
         {
@@ -75,7 +75,7 @@ public class HumanBaseDemo : MonoBehaviour
         }
     }
 
-    protected void OnTriggerStay(Collider other)
+    protected void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("StickyFloor"))
         {
@@ -84,7 +84,7 @@ public class HumanBaseDemo : MonoBehaviour
             speed = _originalSpeed / 4;
         }
 
-        if (other.gameObject.CompareTag("StickyFloor") && _rigidbody.velocity == Vector3.zero)
+        if (other.gameObject.CompareTag("StickyFloor") && _rigidbody.velocity == Vector2.zero)
         {
             _walkSound.pitch = 0.5f;
             _walkSound.Play();
@@ -95,7 +95,7 @@ public class HumanBaseDemo : MonoBehaviour
         }
     }
 
-   protected void OnTriggerExit(Collider other)
+   protected void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("StickyFloor"))
         {
@@ -107,8 +107,8 @@ public class HumanBaseDemo : MonoBehaviour
 
    public void FixedUpdate()
    {
-       Vector3 direction = (Vector2)Vector3.forward * variableJoystick.Vertical + (Vector2)Vector3.right * variableJoystick.Horizontal;
-       _rigidbody.AddForce(direction * ((speed * 10) * Time.fixedDeltaTime), ForceMode.VelocityChange);
+       Vector3 direction = Vector3.up * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
+       _rigidbody.AddForce((Vector2)direction * ((speed * 20) * Time.fixedDeltaTime), (ForceMode2D)ForceMode.VelocityChange);
    }
    
    
@@ -147,7 +147,7 @@ public class HumanBaseDemo : MonoBehaviour
         
         if (sprintLimit > 0 && !_ralentizado && Input.GetKey(KeyCode.LeftShift))
         {
-            if (_rigidbody.velocity != Vector3.zero)
+            if (_rigidbody.velocity != Vector2.zero)
             {
                 speed = _originalSpeed * 2;
                 sprintLimit -= Time.deltaTime;
@@ -194,7 +194,7 @@ public class HumanBaseDemo : MonoBehaviour
         
         
         //sound
-        if (_rigidbody.velocity != Vector3.zero)
+        if (_rigidbody.velocity != Vector2.zero)
         {
             if (!_walkSound.isPlaying)
             {
@@ -203,7 +203,7 @@ public class HumanBaseDemo : MonoBehaviour
                 
             }
         }
-        else if (Input.GetKey(KeyCode.LeftShift) && _rigidbody.velocity != Vector3.zero)
+        else if (Input.GetKey(KeyCode.LeftShift) && _rigidbody.velocity != Vector2.zero)
         {
             if (!_walkSound.isPlaying)
             {
