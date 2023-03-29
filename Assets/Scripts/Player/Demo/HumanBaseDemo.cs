@@ -205,27 +205,27 @@ public class HumanBaseDemo : MonoBehaviour
 
     public void sprintInput(bool canSprint)
     {
+       
         clickingInInputSprint = canSprint;
         
     }
     private void doSprint()
     {
-    
-        if (sprintLimit > 0 && !_ralentizado)
+        bool inputUsed = false;
+        if (Input.GetKey(KeyCode.LeftShift) || clickingInInputSprint)
+        {
+            inputUsed = true;
+        }
+        print("CAN SPRINT?? "+clickingInInputSprint);
+        if (sprintLimit > 0 && !_ralentizado && inputUsed)
         {
             if (_rigidbody.velocity != Vector2.zero)
             {
                 speed = _originalSpeed * 2;
                 sprintLimit -= Time.deltaTime;
             }
-        } 
-        
-        else if (Input.GetKey(KeyCode.LeftShift) || clickingInInputSprint)
-        {
-            speed = _originalSpeed;
-        }
-        
-        else if (sprintLimit < 3f)
+        }else
+        if (sprintLimit < 3f  )
         {
             speed = _originalSpeed;
             sprintLimit += Time.deltaTime;
