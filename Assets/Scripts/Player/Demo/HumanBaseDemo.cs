@@ -26,6 +26,7 @@ public class HumanBaseDemo : MonoBehaviour
     [SerializeField] private VariableJoystick variableJoystick;
     [SerializeField] private Button _sprintButton;
 
+    private bool clickingInInputSprint = false;
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -199,10 +200,17 @@ public class HumanBaseDemo : MonoBehaviour
         {
             _walkSound.Stop();
         }
+        doSprint();
     }
-    
-    public void Sprint()
+
+    public void sprintInput(bool canSprint)
     {
+        clickingInInputSprint = canSprint;
+        
+    }
+    private void doSprint()
+    {
+    
         if (sprintLimit > 0 && !_ralentizado)
         {
             if (_rigidbody.velocity != Vector2.zero)
@@ -212,7 +220,7 @@ public class HumanBaseDemo : MonoBehaviour
             }
         } 
         
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.LeftShift) || clickingInInputSprint)
         {
             speed = _originalSpeed;
         }
