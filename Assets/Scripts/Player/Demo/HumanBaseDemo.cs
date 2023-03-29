@@ -111,7 +111,7 @@ public class HumanBaseDemo : MonoBehaviour
    public void FixedUpdate()
    {
        Vector3 direction = Vector3.up * variableJoystick.Vertical + Vector3.right * variableJoystick.Horizontal;
-       _rigidbody.AddForce((Vector2)direction * ((speed * 20) * Time.fixedDeltaTime), (ForceMode2D)ForceMode.VelocityChange);
+       //_rigidbody.AddForce((Vector2)direction * ((speed * 20) * Time.fixedDeltaTime), (ForceMode2D)ForceMode.VelocityChange);
    }
    
    
@@ -131,7 +131,8 @@ public class HumanBaseDemo : MonoBehaviour
         }
         
         // Controles de movimiento
-        _direction = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        print("Y: "+variableJoystick.Horizontal+" X: "+variableJoystick.Vertical);
+        _direction = new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical);
         _rigidbody.velocity = _direction * speed;
         
         if (Input.GetKey(KeyCode.A))
@@ -142,11 +143,7 @@ public class HumanBaseDemo : MonoBehaviour
         {
             _spriteRenderer.flipX = true;
         }
-        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.S) &&
-            !Input.GetKey(KeyCode.W))
-        {
-            _rigidbody.velocity = Vector3.zero;
-        } 
+        
         
         
 
@@ -211,12 +208,8 @@ public class HumanBaseDemo : MonoBehaviour
     }
     private void doSprint()
     {
-        bool inputUsed = false;
-        if (Input.GetKey(KeyCode.LeftShift) || clickingInInputSprint)
-        {
-            inputUsed = true;
-        }
-        print("CAN SPRINT?? "+clickingInInputSprint);
+        bool inputUsed = Input.GetKey(KeyCode.LeftShift) || clickingInInputSprint;
+        print("CAN SPRINT?? "+inputUsed);
         if (sprintLimit > 0 && !_ralentizado && inputUsed)
         {
             if (_rigidbody.velocity != Vector2.zero)
@@ -224,8 +217,12 @@ public class HumanBaseDemo : MonoBehaviour
                 speed = _originalSpeed * 2;
                 sprintLimit -= Time.deltaTime;
             }
-        }else
-        if (sprintLimit < 3f  )
+            else
+            {
+                speed = _originalSpeed;
+            }
+        }
+        if (sprintLimit < 3f && speed ==_originalSpeed )
         {
             speed = _originalSpeed;
             sprintLimit += Time.deltaTime;
