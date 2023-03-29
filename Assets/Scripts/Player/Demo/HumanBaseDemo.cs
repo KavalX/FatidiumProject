@@ -1,6 +1,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class HumanBaseDemo : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class HumanBaseDemo : MonoBehaviour
     [SerializeField] GameObject _victoryText;
 
     [SerializeField] private VariableJoystick variableJoystick;
+    [SerializeField] private Button _sprintButton;
 
     private void Awake()
     {
@@ -81,7 +83,7 @@ public class HumanBaseDemo : MonoBehaviour
         {
             Debug.Log("Ralentizado");
             _ralentizado = true;
-            speed = _originalSpeed / 4;
+            speed = _originalSpeed / 2;
         }
 
         if (other.gameObject.CompareTag("StickyFloor") && _rigidbody.velocity == Vector2.zero)
@@ -145,26 +147,9 @@ public class HumanBaseDemo : MonoBehaviour
             _rigidbody.velocity = Vector3.zero;
         } 
         
-        if (sprintLimit > 0 && !_ralentizado && Input.GetKey(KeyCode.LeftShift))
-        {
-            if (_rigidbody.velocity != Vector2.zero)
-            {
-                speed = _originalSpeed * 2;
-                sprintLimit -= Time.deltaTime;
-            }
-
-        } 
-        else if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = _originalSpeed;
-        }
-        else if (sprintLimit < 3f)
-        {
-            speed = _originalSpeed;
-            sprintLimit += Time.deltaTime;
-
-        }
         
+
+       
         
         /* if (Input.touchCount > 0)
         {
@@ -190,9 +175,7 @@ public class HumanBaseDemo : MonoBehaviour
                     break;
             }
         } */
-       
-        
-        
+
         //sound
         if (_rigidbody.velocity != Vector2.zero)
         {
@@ -215,6 +198,29 @@ public class HumanBaseDemo : MonoBehaviour
         else
         {
             _walkSound.Stop();
+        }
+    }
+    
+    public void Sprint()
+    {
+        if (sprintLimit > 0 && !_ralentizado)
+        {
+            if (_rigidbody.velocity != Vector2.zero)
+            {
+                speed = _originalSpeed * 2;
+                sprintLimit -= Time.deltaTime;
+            }
+        } 
+        
+        else if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = _originalSpeed;
+        }
+        
+        else if (sprintLimit < 3f)
+        {
+            speed = _originalSpeed;
+            sprintLimit += Time.deltaTime;
         }
     }
 }
