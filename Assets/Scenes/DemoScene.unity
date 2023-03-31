@@ -2364,7 +2364,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Cambio
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3229,14 +3229,10 @@ PrefabInstance:
       propertyPath: _shootSound
       value: 
       objectReference: {fileID: 1659844176}
-    - target: {fileID: 4813705464647358632, guid: 950df8e1114fd78408d9548630ae8fe9, type: 3}
-      propertyPath: cooldown
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4813705464647358632, guid: 950df8e1114fd78408d9548630ae8fe9, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 268466482002506537, guid: 950df8e1114fd78408d9548630ae8fe9, type: 3}
+      propertyPath: variableJoystick
+      value: 
+      objectReference: {fileID: 109300499}
     - target: {fileID: 4813705464647358633, guid: 950df8e1114fd78408d9548630ae8fe9, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -3401,6 +3397,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &1659844181
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659844171}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 0
 --- !u!1 &1678411966
 GameObject:
   m_ObjectHideFlags: 0
@@ -4091,6 +4108,7 @@ MonoBehaviour:
   cooldown: 2
   _shootSound: {fileID: 0}
   speed: 0
+  variableJoystick: {fileID: 0}
 --- !u!114 &1222687806302778634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4174,27 +4192,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4813705464619256403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4813705464619256404}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff8412560f10f4d41af5985c1b015e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  forwardBackPosition:
-    m_InternalValue: 0
-  leftRightPosition:
-    m_InternalValue: 0
-  speed: 5
-  projectile: {fileID: 7089247127430120636, guid: dbcddfdac0433884ab802a10d1cc5d80, type: 3}
-  cooldown: 2
-  _shootSound: {fileID: 0}
 --- !u!1 &4813705464619256404
 GameObject:
   m_ObjectHideFlags: 0
@@ -4205,7 +4202,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4813705464619256401}
   - component: {fileID: 4813705464619256402}
-  - component: {fileID: 4813705464619256403}
   - component: {fileID: 1222687806302778634}
   - component: {fileID: 268466482098135506}
   m_Layer: 0
