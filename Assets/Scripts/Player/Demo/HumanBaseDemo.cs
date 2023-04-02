@@ -25,6 +25,8 @@ public class HumanBaseDemo : MonoBehaviour
     [SerializeField] private VariableJoystick variableJoystick;
     [SerializeField] private Button _sprintButton;
 
+    public bool controlHuman;
+
     private bool clickingInInputSprint = false;
 
     private void Awake()
@@ -32,6 +34,7 @@ public class HumanBaseDemo : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalSpeed = speed;
+        controlHuman = true;
     }
 
     public float Health
@@ -109,6 +112,11 @@ public class HumanBaseDemo : MonoBehaviour
         }
     }
 
+    public void ControlHuman()
+    {
+        controlHuman = !controlHuman;
+    }
+    
     protected new void Update()
     {
         _StaminaBar.SetStamina(sprintLimit);
@@ -118,12 +126,14 @@ public class HumanBaseDemo : MonoBehaviour
             Destroy(gameObject);
         }
 
+        if (!controlHuman) return;
+
         // Limitar velocidad diagonal
         if (_rigidbody.velocity.magnitude > speed)
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * speed;
         }
-
+        
         // Controles de movimiento
         print("Y: " + variableJoystick.Horizontal + " X: " + variableJoystick.Vertical);
         _direction = new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical);
@@ -138,32 +148,6 @@ public class HumanBaseDemo : MonoBehaviour
         {
             _spriteRenderer.flipX = true;
         }
-
-
-        /* if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            Vector2 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-            switch (touch.phase)
-            {
-                case TouchPhase.Began:
-                    if (touchPosition.x < 0)
-                    {
-                        _spriteRenderer.flipX = false;
-                    }
-                    else
-                    {
-                        _spriteRenderer.flipX = true;
-                    }
-                    break;
-                case TouchPhase.Moved:
-                    _rigidbody2D.velocity = touchPosition;
-                    break;
-                case TouchPhase.Ended:
-                    _rigidbody2D.velocity = Vector2.zero;
-                    break;
-            }
-        } */
 
         //sound
         if (_rigidbody.velocity != Vector2.zero)

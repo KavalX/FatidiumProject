@@ -12,6 +12,8 @@ public class GhostDemo : MonoBehaviour
     [SerializeField] private VariableJoystick variableJoystick;
     private Rigidbody2D _rigidbody;
     private Vector2 _direction;
+    
+    public bool controlGhost = false;
 
     private void Awake()
     {
@@ -19,8 +21,15 @@ public class GhostDemo : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
+    public void ControlGhost()
+    {
+        controlGhost = !controlGhost;
+    }
+    
     private new void Update()
     {
+        if (!controlGhost) return;
+        
         // Limitar velocidad diagonal
         if (_rigidbody.velocity.magnitude > speed)
         {
